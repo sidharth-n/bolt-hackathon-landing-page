@@ -2,54 +2,13 @@ import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import "./LandingPage.css"
 
-// Dummy track data
+// Updated track data with 6 tracks and $50,000 total prize
 const trackData = [
-  {
-    id: "defi",
-    name: "DeFi",
-    icon: "💼",
-    prize: "$25,000",
-    description:
-      "Agents that optimize decentralized finance operations, including trading, yield farming, liquidity provision, and portfolio management.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
-  },
-  {
-    id: "treasury",
-    name: "Treasury",
-    icon: "🏦",
-    prize: "$13,000",
-    description:
-      "Agents that optimize treasury management operations and automate financial decisions for DAOs and protocols.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
-  },
-  {
-    id: "prediction",
-    name: "Prediction Market",
-    icon: "📊",
-    prize: "$18,500",
-    description:
-      "Build agents for analyzing and participating in prediction markets with automated strategies and insights.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
-  },
   {
     id: "ai",
     name: "AI Advancement",
     icon: "🧠",
-    prize: "$30,000",
+    prize: "$15,000",
     description:
       "Advanced AI systems and techniques that push the boundaries of agent capabilities and autonomous decision-making.",
     supporters: ["/placeholder-logo.svg", "/placeholder-logo.svg"],
@@ -58,7 +17,7 @@ const trackData = [
     id: "social",
     name: "Social",
     icon: "👥",
-    prize: "$15,000",
+    prize: "$10,000",
     description:
       "Social agents that facilitate community engagement, moderation, and coordination in online spaces.",
     supporters: [
@@ -71,7 +30,7 @@ const trackData = [
     id: "data",
     name: "Data Agents",
     icon: "🔄",
-    prize: "$22,000",
+    prize: "$8,000",
     description:
       "Agents for data collection, analysis, transformation, and insights generation across various domains.",
     supporters: [
@@ -84,7 +43,7 @@ const trackData = [
     id: "dev",
     name: "Developer Tools",
     icon: "🛠️",
-    prize: "$20,000",
+    prize: "$7,000",
     description:
       "Tools and agents that enhance developer productivity, code quality, and software development workflows.",
     supporters: ["/placeholder-logo.svg", "/placeholder-logo.svg"],
@@ -93,7 +52,7 @@ const trackData = [
     id: "gaming",
     name: "Gaming",
     icon: "🎮",
-    prize: "$17,500",
+    prize: "$5,000",
     description:
       "Game agents, NPCs with advanced behaviors, and AI systems that enhance gaming experiences.",
     supporters: [
@@ -103,24 +62,10 @@ const trackData = [
     ],
   },
   {
-    id: "security",
-    name: "Security",
-    icon: "🔐",
-    prize: "$28,000",
-    description:
-      "Security-focused agents for threat detection, vulnerability analysis, and automated defensive measures.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
-  },
-  {
     id: "web3",
     name: "Web3",
     icon: "🌐",
-    prize: "$21,000",
+    prize: "$5,000",
     description:
       "Agents that interface with blockchain protocols, smart contracts, and decentralized applications.",
     supporters: [
@@ -131,43 +76,49 @@ const trackData = [
   },
 ]
 
-// Update judges with real images from the judges folder
+// Update judges with real images and X (Twitter) links
 const judgesData = [
   {
     id: 1,
     name: "Evan You",
     title: "Creator of Vue.js",
     image: "/judges/evan-you.jpeg",
+    xLink: "https://x.com/youyuxi?s=11",
   },
   {
     id: 2,
     name: "Pieter Levels",
     title: "Founder, Nomad List",
     image: "/judges/levelsio.jpeg",
+    xLink: "https://x.com/levelsio?s=11",
   },
   {
     id: 3,
     name: "Logan Kilpatrick",
     title: "Developer Relations, OpenAI",
     image: "/judges/logan-kilpatrick.jpeg",
+    xLink: "https://x.com/officiallogank?s=11",
   },
   {
     id: 4,
     name: "Sarah Guo",
     title: "Founder, Conviction",
     image: "/judges/sarah-guo.jpeg",
+    xLink: "https://x.com/saranormous?s=11",
   },
   {
     id: 5,
     name: "Theo",
     title: "Founder, t3.gg",
     image: "/judges/theo.jpeg",
+    xLink: "https://x.com/theo?s=11",
   },
   {
     id: 6,
     name: "KP",
     title: "Engineering Leader",
     image: "/judges/kp.jpg",
+    xLink: "https://x.com/thisiskp_?s=11",
   },
 ]
 
@@ -243,42 +194,22 @@ export const LandingPage = () => {
 
         if (entry.isIntersecting && !animationStarted.current) {
           animationStarted.current = true
+          let startValue = 0
+          const endValue = 50000 // Changed from the previous value to $50,000
+          const duration = 2000
+          const increment = Math.ceil(endValue / (duration / 20))
 
-          // Target value
-          const targetValue = 1000000
-          // Animation duration in ms
-          const duration = 2500
-          // Start time
-          const startTime = Date.now()
-
-          const updateCounter = () => {
-            const currentTime = Date.now()
-            const elapsed = currentTime - startTime
-
-            // Calculate progress (0 to 1)
-            let progress = Math.min(elapsed / duration, 1)
-
-            // Apply easing function for slowing down (ease-out cubic)
-            progress = 1 - Math.pow(1 - progress, 3)
-
-            // Calculate current value
-            const currentValue = Math.floor(progress * targetValue)
-
-            setPrizeValue(currentValue)
-
-            // Continue animation until complete
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter)
-            } else {
-              // Show the final "$1M+" format
+          const timer = setInterval(() => {
+            startValue += increment
+            if (startValue >= endValue) {
+              startValue = endValue
+              clearInterval(timer)
               setTimeout(() => {
                 setShowFinalValue(true)
               }, 500)
             }
-          }
-
-          // Start the animation
-          requestAnimationFrame(updateCounter)
+            setPrizeValue(startValue)
+          }, 20)
         }
       },
       { threshold: 0.5 }
@@ -297,7 +228,7 @@ export const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      {/* Navigation Bar */}
+      {/* Navigation Bar - Updated with scroll to section functionality */}
       <nav className="navbar">
         <div className="navbar-logo">
           <Link to="/">
@@ -306,16 +237,25 @@ export const LandingPage = () => {
           </Link>
         </div>
         <div className="navbar-links">
-          <Link to="/feature">Feature</Link>
-          <Link to="/about">About</Link>
-          <Link to="/blog">Blog</Link>
+          <a href="#tracks-section" className="nav-link">
+            Tracks
+          </a>
+          <a href="#prize-section" className="nav-link">
+            Prizes
+          </a>
+          <a href="#sponsors-section" className="nav-link">
+            Partners
+          </a>
+          <a href="#judges-section" className="nav-link">
+            Judges
+          </a>
         </div>
         <div className="navbar-buttons">
-          <Link to="/signup" className="btn-signup">
-            Sign Up
+          <Link to="/register" className="btn-signup">
+            Register
           </Link>
-          <Link to="/login" className="btn-login">
-            Login
+          <Link to="/submit" className="btn-login">
+            Submit Project
           </Link>
         </div>
       </nav>
@@ -330,7 +270,7 @@ export const LandingPage = () => {
           muted
           playsInline
         >
-          <source src="/bg2.mp4" type="video/mp4" />
+          <source src="/bg3.mp4" type="video/mp4" />
         </video>
 
         <div className="hero-content">
@@ -371,7 +311,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Prize Section - Updated with animation */}
-      <section className="prize-section">
+      <section id="prize-section" className="prize-section">
         <div className="prize-container" ref={prizeRef}>
           <div
             className={`prize-amount ${showFinalValue ? "final-value" : ""}`}
@@ -394,37 +334,51 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      {/* Sponsors Section - styled like reference */}
-      <section className="sponsors-section">
+      {/* Sponsors Section - Updated with correct website links and spacing */}
+      <section id="sponsors-section" className="sponsors-section">
         <h2 className="sponsors-title">Hackathon Partners</h2>
         <div className="sponsors-grid">
-          {sponsorsData.map(sponsor => (
-            <a
-              key={sponsor.id}
-              href={`https://${sponsor.name
-                .toLowerCase()
-                .replace(/\s+/g, "")}.com`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sponsor-link"
-            >
-              <div className="sponsor-card">
-                <div className="sponsor-logo-container">
-                  <img
-                    src={sponsor.logo}
-                    alt={`${sponsor.name} logo`}
-                    className="sponsor-logo"
-                  />
+          {sponsorsData.map(sponsor => {
+            // Determine the correct website URL based on sponsor name
+            let websiteUrl = "#"
+            if (sponsor.name === "Cloudflare")
+              websiteUrl = "https://www.cloudflare.com/"
+            else if (sponsor.name === "Loops") websiteUrl = "https://loops.so/"
+            else if (sponsor.name === "Supabase")
+              websiteUrl = "https://supabase.com/"
+            else if (sponsor.name === "Netlify")
+              websiteUrl = "https://www.netlify.com/"
+            else if (sponsor.name === "Sentry")
+              websiteUrl = "https://sentry.io/welcome/"
+            else if (sponsor.name === "Algorand Foundation")
+              websiteUrl = "https://algorand.co/"
+
+            return (
+              <a
+                key={sponsor.id}
+                href={websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sponsor-link"
+              >
+                <div className="sponsor-card">
+                  <div className="sponsor-logo-container">
+                    <img
+                      src={sponsor.logo}
+                      alt={`${sponsor.name} logo`}
+                      className="sponsor-logo"
+                    />
+                  </div>
+                  <p className="sponsor-name">{sponsor.name}</p>
                 </div>
-                <p className="sponsor-name">{sponsor.name}</p>
-              </div>
-            </a>
-          ))}
+              </a>
+            )
+          })}
         </div>
       </section>
 
       {/* Updated Tracks Section with interactive functionality */}
-      <section className="tracks-section">
+      <section id="tracks-section" className="tracks-section">
         <div className="tracks-label">TRACKS</div>
         <h2 className="tracks-title">
           Build across 10 tracks and over 120 prizes
@@ -480,8 +434,8 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      {/* Judges Section - Updated with X icon on same line */}
-      <section className="judges-section">
+      {/* Judges Section - Updated with actual X links */}
+      <section id="judges-section" className="judges-section">
         <h2 className="judges-title">Meet Our Judges</h2>
         <div className="judges-grid">
           {judgesData.map(judge => (
@@ -500,7 +454,13 @@ export const LandingPage = () => {
                       <h3 className="judge-name">{judge.name}</h3>
                       <p className="judge-title">{judge.title}</p>
                     </div>
-                    <a href="#" className="judge-social" title="X (Twitter)">
+                    <a
+                      href={judge.xLink}
+                      className="judge-social"
+                      title="X (Twitter)"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
