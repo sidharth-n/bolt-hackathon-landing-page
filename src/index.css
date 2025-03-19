@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("/font/ClashDisplay-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-clash-display: "ClashDisplay", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-clash-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+  color: #fff;
+}
