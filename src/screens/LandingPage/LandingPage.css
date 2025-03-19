@@ -115,6 +115,7 @@
   align-items: center;
   min-height: 100vh;
   padding: 8rem 0 4rem;
+  background-color: #0c0c10;
 }
 
 .hero-background-video {
@@ -125,6 +126,7 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  opacity: 0.7;
 }
 
 .hero-content {
@@ -134,66 +136,100 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  max-width: 600px;
-  margin-left: 10%;
+  max-width: 650px;
+  margin-left: 20%;
   padding: 2rem;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: rgba(20, 20, 30, 0.6);
+  border: 1px solid rgba(118, 54, 230, 0.2);
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+}
+
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.25rem;
+}
+
+.meta-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.meta-separator {
+  width: 1px;
+  height: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 1.5rem;
 }
 
 .main-title {
   font-family: var(--font-clash-display);
-  font-size: clamp(3.5rem, 7vw, 5rem);
-  font-weight: 500;
-  line-height: 1.1;
-  margin: 0 0 1.5rem;
+  font-size: clamp(4rem, 10vw, 6.5rem);
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0 2rem;
   color: white;
   background: linear-gradient(
     143deg,
     rgba(255, 255, 255, 1) 0%,
-    rgba(248, 248, 248, 1) 100%
+    rgba(248, 248, 248, 0.8) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
+  letter-spacing: -0.02em;
+  text-align: left;
 }
 
 .subtitle {
-  font-size: 1.25rem;
-  max-width: 520px;
-  margin: 0 0 2.5rem;
+  font-size: 1.3rem;
+  max-width: 530px;
+  margin: 0 0 3rem;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.5;
+  text-align: left;
 }
 
 .cta-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 1.25rem;
   margin-bottom: 2rem;
   width: 100%;
+  justify-content: flex-start;
 }
 
 .register-button,
 .learn-button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 180px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .register-button {
-  background: linear-gradient(
-    90deg,
-    rgba(118, 54, 230, 1) 0%,
-    rgba(93, 32, 190, 1) 100%
-  );
+  background: linear-gradient(145deg, #7636e6, #5d20be);
   color: white;
   border: none;
+  box-shadow: 0 8px 20px rgba(118, 54, 230, 0.25);
 }
 
 .register-button:hover {
@@ -380,16 +416,52 @@
   }
 
   .hero-content {
-    margin-left: 5%;
-    padding: 1rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
+    margin-left: 0;
+    padding: 2rem;
+    align-items: center;
+    text-align: center;
   }
 
   .main-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    text-align: center;
+  }
+
+  .subtitle {
+    text-align: center;
+  }
+
+  .hero-meta {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .register-button,
+  .learn-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-meta {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .meta-separator {
+    width: 80%;
+    height: 1px;
+    margin: 0.75rem 0;
   }
 }
 
@@ -411,28 +483,37 @@
   margin-bottom: 3rem;
 }
 
-/* Make the prize amount more prominent */
+/* Updated prize amount styles with separate styling for counting vs final state */
 .prize-amount {
   font-family: var(--font-clash-display);
-  font-size: clamp(6rem, 15vw, 12rem);
+  font-size: clamp(3rem, 8vw, 5rem); /* Smaller size during counting */
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
   position: relative;
+  color: #7636e6;
+  text-shadow: 0 0 15px rgba(118, 54, 230, 0.3);
+  transition: all 0.5s ease-out;
 }
 
-/* Add a decorative element similar to the reference */
-.prize-amount::after {
-  content: "";
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 0;
-  right: -20px;
-  background: linear-gradient(145deg, #7636e6, #5d20be);
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(118, 54, 230, 0.5);
+/* Larger size and animation for final state */
+.prize-amount.final-value {
+  font-size: clamp(6rem, 15vw, 12rem); /* Larger size for final value */
+  animation: pulseFinal 0.6s ease-out;
+}
+
+/* Add a subtle pulse effect when the value changes to $1M+ */
+@keyframes pulseFinal {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Style the description to better match the reference */
@@ -449,62 +530,88 @@
   gap: 1rem;
 }
 
-/* Sponsors Section - Updated for the expanded grid */
+/* Sponsors Section - Updated to match screenshot */
 .sponsors-section {
-  padding: 5rem 2rem;
+  padding: 6rem 2rem;
   text-align: center;
   position: relative;
-  z-index: 1;
-  background-color: transparent;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .sponsors-title {
   font-family: var(--font-clash-display);
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 600;
   margin-bottom: 4rem;
-  font-weight: 500;
-  color: #7636e6;
+  color: #00ff85; /* Using green color from screenshot */
+  text-align: center;
 }
 
 .sponsors-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem;
+  gap: 0; /* Remove gap to match screenshot */
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .sponsor-card {
-  background-color: rgba(20, 20, 30, 0.6);
-  border: 1px solid rgba(118, 54, 230, 0.2);
-  border-radius: 12px;
-  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  background-color: #121212; /* Dark background for cards */
+  border: 1px solid #222; /* Subtle border */
+  padding: 1.5rem;
+  transition: background-color 0.3s ease;
 }
 
-.sponsor-logo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 1rem;
+.sponsor-card:hover {
+  background-color: #1a1a1a;
+}
+
+.sponsor-logo-container {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.sponsor-logo img {
-  max-width: 100%;
-  max-height: 100%;
+.sponsor-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .sponsor-name {
-  font-family: var(--font-clash-display);
+  font-size: 0.9rem;
   font-weight: 500;
-  font-size: 1.1rem;
   color: white;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Updated Tracks Section to match reference */
@@ -895,5 +1002,183 @@ body {
   .judges-grid {
     grid-template-columns: 1fr;
     max-width: 300px;
+  }
+}
+
+/* Footer Styles */
+.site-footer {
+  background-color: #0c0c10;
+  border-top: 1px solid rgba(118, 54, 230, 0.2);
+  padding: 4rem 2rem 2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.footer-brand {
+  flex: 0 0 300px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.footer-logo .logo-dot {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-logo .logo-text {
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.footer-tagline {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.footer-links-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  gap: 3rem;
+}
+
+.footer-links-column {
+  flex: 1;
+  min-width: 160px;
+}
+
+.footer-category {
+  color: #7636e6;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s;
+}
+
+.social-icons a:hover {
+  color: #7636e6;
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.footer-legal p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.legal-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legal-links a {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.legal-links a:hover {
+  color: white;
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-brand {
+    flex: 0 0 auto;
+    margin-bottom: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-legal {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-links-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-links-column {
+    width: 100%;
   }
 }
