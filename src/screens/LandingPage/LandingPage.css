@@ -395,8 +395,8 @@
 }
 
 .sponsor-logo {
-  max-width: 80%; /* Reduced from 100% */
-  max-height: 80%; /* Reduced from 100% */
+  max-width: 70%; /* Further reduced from 80% */
+  max-height: 70%; /* Further reduced from 80% */
   object-fit: contain;
 }
 
@@ -612,7 +612,7 @@
 
 .sponsor-logo-container {
   width: 100%;
-  height: 80px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -739,12 +739,18 @@
   border-radius: 20px;
   padding: 3rem;
   transition: all 0.3s ease;
+  height: 400px; /* Fixed height */
+  overflow: hidden; /* Prevent content from causing resize */
+  display: flex;
+  flex-direction: column;
 }
 
 .track-info {
   display: flex;
   text-align: left;
   animation: fadeIn 0.3s ease-out forwards;
+  flex: 1;
+  align-items: flex-start;
 }
 
 .track-prize {
@@ -754,10 +760,16 @@
   color: #7636e6;
   margin-right: 3rem;
   white-space: nowrap;
+  min-width: 160px; /* Ensure consistent width */
+  align-self: flex-start;
+  padding-top: 0.5rem;
 }
 
 .track-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .track-icon-large {
@@ -768,47 +780,45 @@
   font-weight: 600;
   color: white;
   margin-bottom: 1.5rem;
-}
-
-.track-icon-large .tab-icon {
-  font-size: 1.75rem;
+  padding-top: 0.5rem;
 }
 
 .track-description {
   font-size: 1.1rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2rem;
+  /*  margin-bottom: auto; */
+  padding-bottom: 2rem;
 }
 
 .track-supported {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 1.5rem;
-}
-
-.track-supported p {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 1rem;
+  /* margin-top: auto; */
+  padding-top: 1rem;
 }
 
 .supporter-logos {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .supporter-logo {
-  width: 40px;
   height: 40px;
+  width: auto;
+  background-color: rgba(20, 20, 30, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(118, 54, 230, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .supporter-logo img {
-  max-width: 100%;
   max-height: 100%;
+  max-width: 80%;
+  object-fit: contain;
 }
 
 .tracks-cta {
@@ -1268,4 +1278,19 @@ html {
 /* Add padding to sections for better scrolling positioning */
 section[id] {
   scroll-margin-top: 80px; /* Adjust based on navbar height */
+}
+
+/* Fixed size for prize counter */
+.prize-counter {
+  position: relative;
+}
+
+.counter-value {
+  font-family: var(--font-clash-display);
+  font-size: 6rem;
+  font-weight: 600;
+  min-width: 300px; /* Ensure consistent width */
+  display: inline-block;
+  text-align: center;
+  color: #7636e6; /* Restore the purple color */
 }

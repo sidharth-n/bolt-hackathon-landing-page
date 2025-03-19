@@ -2,7 +2,22 @@ import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 import "./LandingPage.css"
 
-// Updated track data with 6 tracks and $50,000 total prize
+// Create a function to generate random logos for track supporters
+const getRandomLogos = count => {
+  const sponsorLogos = [
+    "sponser-logos/cloudfare.webp",
+    "sponser-logos/loops.jpg",
+    "sponser-logos/superBase.png",
+    "sponser-logos/netlify.png",
+    "sponser-logos/getsentry.jpeg",
+    "sponser-logos/algorandfoundation.jpeg",
+  ]
+
+  // Shuffle array and get random elements
+  return [...sponsorLogos].sort(() => 0.5 - Math.random()).slice(0, count)
+}
+
+// Updated track data with 6 tracks, $50,000 total prize, and random logos
 const trackData = [
   {
     id: "ai",
@@ -11,7 +26,7 @@ const trackData = [
     prize: "$15,000",
     description:
       "Advanced AI systems and techniques that push the boundaries of agent capabilities and autonomous decision-making.",
-    supporters: ["/placeholder-logo.svg", "/placeholder-logo.svg"],
+    supporters: getRandomLogos(2),
   },
   {
     id: "social",
@@ -20,11 +35,7 @@ const trackData = [
     prize: "$10,000",
     description:
       "Social agents that facilitate community engagement, moderation, and coordination in online spaces.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
+    supporters: getRandomLogos(3),
   },
   {
     id: "data",
@@ -33,11 +44,7 @@ const trackData = [
     prize: "$8,000",
     description:
       "Agents for data collection, analysis, transformation, and insights generation across various domains.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
+    supporters: getRandomLogos(2),
   },
   {
     id: "dev",
@@ -46,7 +53,7 @@ const trackData = [
     prize: "$7,000",
     description:
       "Tools and agents that enhance developer productivity, code quality, and software development workflows.",
-    supporters: ["/placeholder-logo.svg", "/placeholder-logo.svg"],
+    supporters: getRandomLogos(2),
   },
   {
     id: "gaming",
@@ -55,11 +62,7 @@ const trackData = [
     prize: "$5,000",
     description:
       "Game agents, NPCs with advanced behaviors, and AI systems that enhance gaming experiences.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
+    supporters: getRandomLogos(3),
   },
   {
     id: "web3",
@@ -68,11 +71,7 @@ const trackData = [
     prize: "$5,000",
     description:
       "Agents that interface with blockchain protocols, smart contracts, and decentralized applications.",
-    supporters: [
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-      "/placeholder-logo.svg",
-    ],
+    supporters: getRandomLogos(3),
   },
 ]
 
@@ -176,8 +175,11 @@ export const LandingPage = () => {
   const prizeRef = useRef(null)
   const animationStarted = useRef(false)
 
-  // Function to format number without commas
+  // Function to format number without changing size
   const formatNumber = num => {
+    if (num >= 1000000) {
+      return "$1M+"
+    }
     return "$" + num.toString()
   }
 
@@ -195,8 +197,8 @@ export const LandingPage = () => {
         if (entry.isIntersecting && !animationStarted.current) {
           animationStarted.current = true
           let startValue = 0
-          const endValue = 50000 // Changed from the previous value to $50,000
-          const duration = 2000
+          const endValue = 999999 // Count up to just below 1M
+          const duration = 2500 // Slightly longer duration for larger number
           const increment = Math.ceil(endValue / (duration / 20))
 
           const timer = setInterval(() => {
@@ -205,7 +207,7 @@ export const LandingPage = () => {
               startValue = endValue
               clearInterval(timer)
               setTimeout(() => {
-                setShowFinalValue(true)
+                setShowFinalValue(true) // This will show "$1M+"
               }, 500)
             }
             setPrizeValue(startValue)
@@ -313,15 +315,13 @@ export const LandingPage = () => {
       {/* Prize Section - Updated with animation */}
       <section id="prize-section" className="prize-section">
         <div className="prize-container" ref={prizeRef}>
-          <div
-            className={`prize-amount ${showFinalValue ? "final-value" : ""}`}
-          >
-            {showFinalValue ? "$1M+" : formatNumber(prizeValue)}
+          <div className="prize-counter">
+            <span className="counter-value">
+              {showFinalValue ? "$1M+" : formatNumber(prizeValue)}
+            </span>
           </div>
           <div className="prize-description">
-            in rewards for innovative
-            <br />
-            AI projects and agents
+            <p>in total prizes</p>
           </div>
         </div>
         <div className="prize-cta-buttons">
@@ -381,7 +381,8 @@ export const LandingPage = () => {
       <section id="tracks-section" className="tracks-section">
         <div className="tracks-label">TRACKS</div>
         <h2 className="tracks-title">
-          Build across 10 tracks and over 120 prizes
+          Compete across <span className="highlight">6 tracks</span> with over{" "}
+          <span className="highlight">50</span> prizes
         </h2>
 
         {/* Track selector tabs - now with onClick handlers */}
@@ -603,10 +604,12 @@ export const LandingPage = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d="M18 9C18 9 16.5 7.5 14 7.5C11.5 7.5 10 9 10 9C10 9 7 8.75 5.5 10.5C4 12.25 4 18 4 18C4 18 7 19.5 10 19.5C13 19.5 16 18 16 18C16 18a26.35 26.35 0 0 0 2-4C19 11 18 9 18 9Z"></path>
-                  <path d="M13.5 12.5C13.5 13.33 12.83 14 12 14C11.17 14 10.5 13.33 10.5 12.5C10.5 11.67 11.17 11 12 11C12.83 11 13.5 11.67 13.5 12.5Z"></path>
-                  <path d="M16.5 14.5C16.5 15.33 15.83 16 15 16C14.17 16 13.5 15.33 13.5 14.5C13.5 13.67 14.17 13 15 13C15.83 13 16.5 13.67 16.5 14.5Z"></path>
-                  <path d="M10.5 14.5C10.5 15.33 9.83 16 9 16C8.17 16 7.5 15.33 7.5 14.5C7.5 13.67 8.17 13 9 13C9.83 13 10.5 13.67 10.5 14.5Z"></path>
+                  <rect width="20" height="16" x="2" y="4" rx="3"></rect>
+                  <circle cx="9" cy="12" r="1"></circle>
+                  <circle cx="15" cy="12" r="1"></circle>
+                  <path d="M8 8h.01"></path>
+                  <path d="M16 8h.01"></path>
+                  <path d="M8 16l4-4 4 4"></path>
                 </svg>
               </a>
               <a
