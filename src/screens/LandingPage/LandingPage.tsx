@@ -131,67 +131,43 @@ const trackData = [
   },
 ]
 
-// Add this judges data array after the trackData array
+// Update judges with real images from the judges folder
 const judgesData = [
   {
     id: 1,
-    name: "Freysa",
-    title: "Sovereign Agent, Freysa",
-    image: "/placeholder-judge.png",
+    name: "Evan You",
+    title: "Creator of Vue.js",
+    image: "/judges/evan-you.jpeg",
   },
   {
     id: 2,
-    name: "Nader Dabit",
-    title: "Director of DevRel, Eigenlayer",
-    image: "/placeholder-judge.png",
+    name: "Pieter Levels",
+    title: "Founder, Nomad List",
+    image: "/judges/levelsio.jpeg",
   },
   {
     id: 3,
-    name: "Eric Conner",
-    title: "Crypto Investor",
-    image: "/placeholder-judge.png",
+    name: "Logan Kilpatrick",
+    title: "Developer Relations, OpenAI",
+    image: "/judges/logan-kilpatrick.jpeg",
   },
   {
     id: 4,
-    name: "Erik Voorhees",
-    title: "Founder, Venice.ai",
-    image: "/placeholder-judge.png",
+    name: "Sarah Guo",
+    title: "Founder, Conviction",
+    image: "/judges/sarah-guo.jpeg",
   },
   {
     id: 5,
-    name: "Daniele",
-    title: "Founder, HeyAnon",
-    image: "/placeholder-judge.png",
+    name: "Theo",
+    title: "Founder, t3.gg",
+    image: "/judges/theo.jpeg",
   },
   {
     id: 6,
-    name: "Doug Millett",
-    title: "Product Manager, Eliza Labs",
-    image: "/placeholder-judge.png",
-  },
-  {
-    id: 7,
-    name: "Jeffy Yu",
-    title: "Founder, Zerebro",
-    image: "/placeholder-judge.png",
-  },
-  {
-    id: 8,
-    name: "Francesco Andreoli",
-    title: "DevRel, Linea",
-    image: "/placeholder-judge.png",
-  },
-  {
-    id: 9,
-    name: "Naiane Rosa",
-    title: "Senior Software Engineer, Olas",
-    image: "/placeholder-judge.png",
-  },
-  {
-    id: 10,
-    name: "Louis",
-    title: "DevEx, Safe",
-    image: "/placeholder-judge.png",
+    name: "KP",
+    title: "Engineering Leader",
+    image: "/judges/kp.jpg",
   },
 ]
 
@@ -354,7 +330,7 @@ export const LandingPage = () => {
           muted
           playsInline
         >
-          <source src="/bg.mp4" type="video/mp4" />
+          <source src="/bg2.mp4" type="video/mp4" />
         </video>
 
         <div className="hero-content">
@@ -423,16 +399,26 @@ export const LandingPage = () => {
         <h2 className="sponsors-title">Hackathon Partners</h2>
         <div className="sponsors-grid">
           {sponsorsData.map(sponsor => (
-            <div key={sponsor.id} className="sponsor-card">
-              <div className="sponsor-logo-container">
-                <img
-                  src={sponsor.logo}
-                  alt={`${sponsor.name} logo`}
-                  className="sponsor-logo"
-                />
+            <a
+              key={sponsor.id}
+              href={`https://${sponsor.name
+                .toLowerCase()
+                .replace(/\s+/g, "")}.com`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sponsor-link"
+            >
+              <div className="sponsor-card">
+                <div className="sponsor-logo-container">
+                  <img
+                    src={sponsor.logo}
+                    alt={`${sponsor.name} logo`}
+                    className="sponsor-logo"
+                  />
+                </div>
+                <p className="sponsor-name">{sponsor.name}</p>
               </div>
-              <p className="sponsor-name">{sponsor.name}</p>
-            </div>
+            </a>
           ))}
         </div>
       </section>
@@ -494,28 +480,41 @@ export const LandingPage = () => {
         </div>
       </section>
 
+      {/* Judges Section - Updated with X icon on same line */}
       <section className="judges-section">
-        <h2 className="judges-title">
-          Connect with leading AI x Hackathon judges
-        </h2>
+        <h2 className="judges-title">Meet Our Judges</h2>
         <div className="judges-grid">
           {judgesData.map(judge => (
-            <div key={judge.id} className="judge-card">
-              <div className="judge-image-container">
-                <img
-                  src={judge.image}
-                  alt={judge.name}
-                  className="judge-image"
-                />
+            <a key={judge.id} href="#" className="judge-link">
+              <div className="judge-card">
+                <div className="judge-image-container">
+                  <img
+                    src={judge.image}
+                    alt={`${judge.name}`}
+                    className="judge-image"
+                  />
+                </div>
+                <div className="judge-info">
+                  <div className="judge-header">
+                    <div>
+                      <h3 className="judge-name">{judge.name}</h3>
+                      <p className="judge-title">{judge.title}</p>
+                    </div>
+                    <a href="#" className="judge-social" title="X (Twitter)">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div className="judge-info">
-                <h3 className="judge-name">{judge.name}</h3>
-                <p className="judge-title">{judge.title}</p>
-              </div>
-              <div className="judge-arrow">
-                <span className="arrow">→</span>
-              </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
