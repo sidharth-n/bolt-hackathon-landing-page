@@ -237,7 +237,7 @@ export const LandingPage = () => {
       <nav className="navbar">
         <div className="navbar-logo">
           <Link to="/">
-            <span className="logo-dot"></span>
+            <img src="/logo.png" alt="Hackathon.dev Logo" />
             <span className="logo-text">Hackathon.dev</span>
           </Link>
         </div>
@@ -377,7 +377,7 @@ export const LandingPage = () => {
 
       {/* Sponsors Section - Updated with correct website links and spacing */}
       <section id="sponsors-section" className="sponsors-section">
-        <h2 className="sponsors-title">Hackathon Partners</h2>
+        <h2 className="sponsors-title">Our Partners</h2>
         <div className="sponsors-grid">
           {sponsorsData.map(sponsor => {
             // Generate website URL based on sponsor name (or use actual URLs if you have them)
