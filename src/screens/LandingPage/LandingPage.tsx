@@ -513,12 +513,15 @@ export const LandingPage = () => {
         </div>
       </section>
 
-      <footer className="site-footer">
+      {/* Footer with logo */}
+      <footer className="footer">
         <div className="footer-container">
           <div className="footer-brand">
             <div className="footer-logo">
-              <span className="logo-dot"></span>
-              <span className="logo-text">Hackathon.dev</span>
+              <Link to="/">
+                <img src="/logo.png" alt="Hackathon.dev Logo" />
+                <span className="logo-text">Hackathon.dev</span>
+              </Link>
             </div>
             <p className="footer-tagline">Build the future of AI</p>
           </div>
@@ -688,7 +691,9 @@ export const LandingPage = () => {
             </div>
           </div>
           <div className="footer-legal">
-            <p>© 2025 Hackathon.dev. All rights reserved.</p>
+            <p>
+              © {new Date().getFullYear()} Hackathon.dev. All rights reserved.
+            </p>
             <div className="legal-links">
               <Link to="/privacy">Privacy</Link>
               <Link to="/terms">Terms</Link>
