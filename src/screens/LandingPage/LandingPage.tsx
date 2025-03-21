@@ -175,6 +175,9 @@ export const LandingPage = () => {
   const prizeRef = useRef(null)
   const animationStarted = useRef(false)
 
+  // Add this inside the LandingPage component
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   // Function to format number without changing size
   const formatNumber = num => {
     if (num >= 1000000) {
@@ -260,7 +263,45 @@ export const LandingPage = () => {
             Submit Project
           </Link>
         </div>
+        <button
+          className="mobile-menu-button"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          ☰
+        </button>
       </nav>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${mobileMenuOpen ? "active" : ""}`}>
+        <button
+          className="mobile-menu-close"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          ✕
+        </button>
+        <div className="mobile-menu-links">
+          <a href="#tracks-section" onClick={() => setMobileMenuOpen(false)}>
+            Tracks
+          </a>
+          <a href="#prize-section" onClick={() => setMobileMenuOpen(false)}>
+            Prizes
+          </a>
+          <a href="#sponsors-section" onClick={() => setMobileMenuOpen(false)}>
+            Partners
+          </a>
+          <a href="#judges-section" onClick={() => setMobileMenuOpen(false)}>
+            Judges
+          </a>
+        </div>
+        <div className="mobile-menu-buttons">
+          <a className="mobile-register" href="/register">
+            Register
+          </a>
+          <a className="mobile-submit" href="/submit">
+            Submit Project
+          </a>
+        </div>
+      </div>
 
       {/* Hero Section - Updated with date and location info */}
       <section className="hero-section">
@@ -272,7 +313,7 @@ export const LandingPage = () => {
           muted
           playsInline
         >
-          <source src="/bg3.mp4" type="video/mp4" />
+          <source src="/bg4.mp4" type="video/mp4" />
         </video>
 
         <div className="hero-content">
@@ -339,26 +380,18 @@ export const LandingPage = () => {
         <h2 className="sponsors-title">Hackathon Partners</h2>
         <div className="sponsors-grid">
           {sponsorsData.map(sponsor => {
-            // Determine the correct website URL based on sponsor name
-            let websiteUrl = "#"
-            if (sponsor.name === "Cloudflare")
-              websiteUrl = "https://www.cloudflare.com/"
-            else if (sponsor.name === "Loops") websiteUrl = "https://loops.so/"
-            else if (sponsor.name === "Supabase")
-              websiteUrl = "https://supabase.com/"
-            else if (sponsor.name === "Netlify")
-              websiteUrl = "https://www.netlify.com/"
-            else if (sponsor.name === "Sentry")
-              websiteUrl = "https://sentry.io/welcome/"
-            else if (sponsor.name === "Algorand Foundation")
-              websiteUrl = "https://algorand.co/"
+            // Generate website URL based on sponsor name (or use actual URLs if you have them)
+            const websiteUrl = `https://${sponsor.name
+              .toLowerCase()
+              .replace(/\s+/g, "")}.com`
 
             return (
               <a
                 key={sponsor.id}
                 href={websiteUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
+                referrerpolicy="no-referrer"
                 className="sponsor-link"
               >
                 <div className="sponsor-card">

@@ -452,26 +452,63 @@
   .hero-content {
     margin-left: 0;
     padding: 2rem;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .main-title {
-    font-size: clamp(3rem, 10vw, 4.5rem);
-    text-align: center;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    text-align: left;
+    margin-left: 0;
   }
 
   .subtitle {
-    text-align: center;
+    text-align: left;
+    max-width: 90%;
   }
 
   .hero-meta {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2rem 0 2.5rem;
+    align-self: flex-start;
+    background: rgba(20, 20, 30, 0.6);
+    border-radius: 8px;
+    padding: 0.5rem;
+  }
+
+  .hero-meta-item {
+    padding: 0.25rem 0.75rem;
+  }
+
+  .meta-separator {
+    height: 24px;
+    margin: 0 0.25rem;
+  }
+
+  .meta-label {
+    font-size: 0.65rem;
+    opacity: 0.7;
+  }
+
+  .meta-value {
+    font-size: 0.9rem;
   }
 
   .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .register-button,
+  .learn-button {
+    width: 100%;
+    text-align: center;
     justify-content: center;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
   }
 }
 
@@ -654,6 +691,19 @@
 @media (max-width: 600px) {
   .sponsors-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .sponsor-card {
+    padding: 0.75rem;
+  }
+
+  .sponsor-logo-container {
+    height: 40px;
+  }
+
+  .sponsor-name {
+    font-size: 0.8rem;
   }
 }
 
@@ -845,12 +895,30 @@
 
 @media (max-width: 600px) {
   .track-tabs {
+    flex-wrap: wrap;
     gap: 0.5rem;
   }
 
   .track-tab {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+    flex: 0 0 calc(50% - 0.5rem);
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .track-details {
+    padding: 1.5rem;
+  }
+
+  .track-prize {
+    font-size: 2rem;
+  }
+
+  .track-icon-large {
+    font-size: 1.5rem;
+  }
+
+  .supporter-logos {
+    flex-wrap: wrap;
   }
 }
 
@@ -1074,14 +1142,13 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .judges-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
   }
 
-  .judge-image-container {
-    height: 200px;
+  .judge-card {
+    max-width: 100%;
   }
 }
 
@@ -1293,4 +1360,772 @@ section[id] {
   display: inline-block;
   text-align: center;
   color: #7636e6; /* Restore the purple color */
+}
+
+/* New mobile responsiveness styles - add these at the end of your existing CSS */
+
+/* General responsive adjustments */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    max-width: 100%;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .register-button,
+  .learn-button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
+  }
+}
+
+/* Hero section responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 6rem 1rem 4rem;
+    height: 100vh; /* Ensure full height on mobile */
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    padding-bottom: 5rem; /* Add space at bottom for buttons */
+  }
+
+  .main-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .register-button,
+  .learn-button {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .hero-background-video {
+    object-position: 70% center; /* Better position for mobile */
+  }
+}
+
+/* Prize section responsive */
+@media (max-width: 768px) {
+  .prize-section {
+    padding: 4rem 1rem;
+  }
+
+  .counter-value {
+    font-size: 4rem !important; /* Important to override previous rules */
+    letter-spacing: -1px;
+    min-width: auto;
+    line-height: 1.1;
+    padding: 1rem 0;
+  }
+
+  .prize-description p {
+    font-size: 1.2rem;
+    margin-top: 0;
+  }
+}
+
+/* Sponsors grid responsive */
+@media (max-width: 1200px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .sponsor-card {
+    padding: 0.75rem;
+  }
+
+  .sponsor-logo-container {
+    height: 40px;
+  }
+
+  .sponsor-name {
+    font-size: 0.8rem;
+  }
+}
+
+/* Tracks section responsive */
+@media (max-width: 768px) {
+  .tracks-section {
+    padding: 4rem 1rem;
+  }
+
+  .track-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .track-tab {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.75rem 0.5rem;
+    justify-content: center;
+  }
+
+  .track-details {
+    padding: 1.5rem 1rem;
+  }
+
+  .track-info {
+    flex-direction: column;
+  }
+
+  .track-prize {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+}
+
+/* Judges section responsive */
+@media (max-width: 1200px) {
+  .judges-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .judges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .judges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .judge-card {
+    max-width: 100%;
+  }
+}
+
+/* Navbar mobile menu for smaller screens */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 1rem;
+    position: fixed;
+    background-color: rgba(10, 10, 15, 0.9);
+  }
+
+  .navbar-logo a {
+    font-size: 1.1rem;
+  }
+
+  .logo-dot {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Fixed elements adjustment */
+@media (max-width: 768px) {
+  .hero-background-video {
+    object-position: 65% center;
+  }
+}
+
+/* Enhance touch targets for mobile */
+@media (max-width: 768px) {
+  .nav-link,
+  .footer-links a,
+  .legal-links a {
+    padding: 0.5rem 0;
+  }
+
+  .social-icons {
+    gap: 1.5rem;
+  }
+
+  .social-icons a {
+    padding: 0.5rem;
+  }
+}
+
+/* Improved mobile responsiveness */
+
+/* Fixed judge cards layout for mobile */
+@media (max-width: 768px) {
+  .judges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  .judge-profile {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .judge-headshot {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Fix mobile navigation */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    position: fixed;
+    background-color: rgba(10, 10, 15, 0.9);
+  }
+
+  .navbar-logo a {
+    font-size: 1.1rem;
+  }
+
+  .logo-dot {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Fix prize section for mobile */
+@media (max-width: 768px) {
+  .prize-section {
+    padding: 4rem 1rem;
+  }
+
+  .counter-value {
+    font-size: 4rem !important; /* Important to override previous rules */
+    letter-spacing: -1px;
+    min-width: auto;
+    line-height: 1.1;
+    padding: 1rem 0;
+  }
+
+  .prize-description p {
+    font-size: 1.2rem;
+    margin-top: 0;
+  }
+}
+
+/* Fix tracks section for mobile */
+@media (max-width: 768px) {
+  .tracks-section {
+    padding: 4rem 1rem;
+  }
+
+  .track-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .track-tab {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.75rem 0.5rem;
+    justify-content: center;
+  }
+
+  .track-details {
+    padding: 1.5rem 1rem;
+  }
+
+  .track-info {
+    flex-direction: column;
+  }
+
+  .track-prize {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+}
+
+/* Fix sponsors section for mobile */
+@media (max-width: 768px) {
+  .sponsors-section {
+    padding: 4rem 1rem;
+  }
+
+  .sponsors-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Fix footer for mobile */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 1rem 2rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-links-container {
+    margin-top: 2rem;
+  }
+
+  .footer-legal {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .legal-links {
+    margin-top: 1rem;
+  }
+}
+
+/* Fix section margins on mobile */
+@media (max-width: 768px) {
+  section {
+    margin-bottom: 0;
+  }
+
+  section[id] {
+    scroll-margin-top: 60px;
+  }
+}
+
+/* Mobile menu additions */
+.mobile-menu-button {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(12, 12, 16, 0.95);
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.mobile-menu.active {
+  display: flex;
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.mobile-menu-links a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  padding: 0.75rem;
+}
+
+.mobile-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.mobile-menu-buttons a {
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.mobile-register {
+  background: linear-gradient(145deg, #7636e6, #5d20be);
+  color: white;
+}
+
+.mobile-submit {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Improved button styling for mobile */
+@media (max-width: 768px) {
+  /* Show mobile menu button */
+  .mobile-menu-button {
+    display: block;
+  }
+
+  /* Hide the regular navbar buttons */
+  .navbar-buttons {
+    display: none;
+  }
+
+  /* Remove the hamburger icon we added before */
+  .navbar::after {
+    content: none;
+  }
+
+  /* Improve buttons in all sections */
+  .register-button,
+  .learn-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .register-button {
+    background: linear-gradient(145deg, #7636e6, #5d20be);
+    color: white;
+    box-shadow: 0 4px 15px rgba(118, 54, 230, 0.3);
+  }
+
+  .learn-button {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(20, 20, 30, 0.6);
+  }
+
+  .arrow {
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Fix tracks section overflow */
+@media (max-width: 768px) {
+  .tracks-section {
+    padding: 4rem 1rem;
+    overflow: hidden;
+  }
+
+  .track-details {
+    height: auto;
+    min-height: 350px;
+    max-height: 450px;
+    padding: 1.5rem;
+    overflow: auto;
+  }
+
+  .track-tabs {
+    margin-bottom: 1.5rem;
+  }
+
+  .track-prize {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .track-icon-large {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .track-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .track-supported {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Fix track supporter logos */
+  .supporter-logos {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .supporter-logo {
+    height: 32px;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .supporter-logo img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Adjust prize counter in mobile */
+@media (max-width: 768px) {
+  .prize-counter {
+    padding-bottom: 1rem;
+  }
+
+  .counter-value {
+    font-size: 5rem;
+    min-width: auto;
+    color: #7636e6;
+    text-shadow: 0 0 10px rgba(118, 54, 230, 0.3);
+  }
+
+  .prize-section .register-button,
+  .prize-section .learn-button {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 1rem;
+  }
+}
+
+/* Only adjust the LAYOUT of buttons in prize and tracks sections */
+@media (max-width: 768px) {
+  /* Make prize section buttons stack vertically like in hero section */
+  .prize-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  /* Make track section buttons stack vertically */
+  .tracks-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+/* Fix tracks section overflow without changing styling */
+@media (max-width: 768px) {
+  .tracks-section {
+    padding: 4rem 1rem 6rem;
+    margin-bottom: 2rem;
+  }
+
+  .track-details {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    overflow: visible;
+  }
+
+  .track-content {
+    padding-bottom: 1rem;
+  }
+}
+
+/* Make judges grid 2x2 on mobile without changing styling */
+@media (max-width: 768px) {
+  .judges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  /* Keep the same styling for judge cards from desktop */
+  .judge-card {
+    /* Keep original styles, just adjust layout */
+  }
+}
+
+/* Fix date and location tags to be horizontal and smaller on mobile */
+@media (max-width: 768px) {
+  .hero-meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+    background: rgba(20, 20, 30, 0.6);
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin: 0 auto 2rem;
+  }
+
+  .hero-meta-item {
+    padding: 0.25rem 0.75rem;
+  }
+
+  .meta-separator {
+    height: 24px;
+    margin: 0 0.25rem;
+  }
+
+  .meta-label {
+    font-size: 0.65rem;
+    opacity: 0.7;
+  }
+
+  .meta-value {
+    font-size: 0.9rem;
+  }
+}
+
+/* Fix judges grid layout for mobile */
+@media (max-width: 768px) {
+  .judges-section {
+    padding: 4rem 1rem;
+    overflow: hidden;
+  }
+
+  .judges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 100%;
+    padding: 0 5px;
+  }
+
+  /* Completely redesign the judge card for mobile */
+  .judge-card {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: rgba(20, 20, 30, 0.6);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Position the judge image to fill the card */
+  .judge-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .judge-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Create an overlay for text at the bottom */
+  .judge-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+  }
+
+  /* Style the name and title */
+  .judge-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .judge-title {
+    font-size: 0.7rem;
+    margin: 2px 0 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Style the X button in corner */
+  .judge-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    z-index: 3;
+  }
+}
+
+/* Fix spacing between sections on mobile */
+@media (max-width: 768px) {
+  section {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }
